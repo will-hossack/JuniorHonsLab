@@ -1,0 +1,24 @@
+import matplotlib.pyplot as plt     # Import the plot package as plt
+import numpy as np
+import csvfile as f
+import csv
+
+
+def main():
+
+    
+    filename = input("Input file : ")
+    t,x = f.readCSV(filename,(True,True,False),separ="\t",headerskip=5)
+
+    #    plt.plot(t,x)
+    #    plt.show()
+
+
+    cft = np.fft.fft(x)
+    cft = np.fft.fftshift(cft)
+    rft = np.log(abs(cft) + 1.0)
+
+    plt.plot(t,rft)
+    plt.show()
+    
+main()

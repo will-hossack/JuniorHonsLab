@@ -1,0 +1,12 @@
+import math
+import matplotlib.pyplot as plt     # Import the plot package as plt
+import numpy as np
+import csvfile as f
+
+def main():
+    temp,time = f.readCSV(input("File : "))
+
+    plt.pyplot(temp,time)
+    plt.show()
+
+main()
