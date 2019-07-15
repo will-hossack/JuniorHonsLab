@@ -1,0 +1,39 @@
+"""
+      Porgram to plot slits
+"""
+from slits import TwoSlits
+from scipy.integrate import quad
+import numpy as np
+import matplotlib.pyplot as plt
+import tio as t
+
+
+def main():
+    width = t.getFloat("Slit width",0.1)
+    separ = t.getFloat("Slit seperation",0.4)
+    distance = t.getFloat("Distance",450)
+    samples = t.getInt("Samples",50)
+    imageSlit = t.getFloat("Image Slit width",0.1)
+    
+    slits = TwoSlits(separ,width,distance,0.65)
+    
+
+    xpos = np.linspace(-3,3,samples)
+    yvals = np.empty(xpos.size)
+
+    for i,x in enumerate(xpos):
+        a = x - 0.5*imageSlit
+        b = x + 0.5*imageSlit
+        y,err = quad(slits.getValue,a,b)
+        yvals[i] = y/imageSlit
+
+
+    xfine = np.linspace(-3,3,500)
+    plt.plot(xpos,yvals,'o')
+    plt.plot(xfine,slits.getArrayValue(xfine))
+    plt.ylim(0.0,1.0)
+    
+    plt.show()
+        
+main()   
+    
