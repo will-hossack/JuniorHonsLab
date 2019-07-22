@@ -12,17 +12,20 @@ class TwoSlits(object):
     :param separ: seperation of centre
     :param width: width of slit
     :param distance: distance to image plane
+    :param peak: centre of patters (Default = 0.0)
     :param wave: the wavelength (Default = 0.65 microns)
     :praam intensity: Intesity at ceebtral peak (Default = 1.0)
     """
 
-    def __init__(self,separ,width,distance,wave = 0.65, intensity = 1.0):
+    def __init__(self,separ,width,distance,peak = 0.0, wave = 0.65, intensity = 1.0,offset = 0.0):
 
         self.separ = float(separ)
         self.width = float(width)
         self.distance = float(distance)
+        self.peak = float(peak) 
         self.wavelength = wave/1000.0
         self.intensity = intensity
+        self.offset = offset
 
     def getValue(self,x):
         """
@@ -31,13 +34,15 @@ class TwoSlits(object):
         :param x: the distance from optical axis
         :return: the intensity
         """
+
+        x -= self.peak
         alpha = math.pi*self.width*x/(self.wavelength*self.distance)
         beta = math.pi*self.separ*x/(self.wavelength*self.distance)
         if alpha == 0.0:
-            return self.intensity
+            return self.intensity + self.offset
         else:
             a = math.sin(alpha)/alpha * math.cos(beta)
-            return self.intensity*a*a
+            return self.intensity*a*a + self.offset
 
             
     def getArrayValues(self,x_array):
