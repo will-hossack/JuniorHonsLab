@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qti>
+<qti app="QtiPlot" version="1.0.0-rc9" dpi="72" arch="Mac64" script="muParser" windows="3" expand="1">
+	<window type="1" name="Table1" date="2458694.5972154" x="0" y="0" w="255" h="280">
+		<tab rows="30" cols="2" labels="0">
+			<col name="1" type="6" num="0" prec="13" plot="1" width="100" stat="0"/>
+			<col name="2" type="6" num="0" prec="13" plot="2" width="100" stat="0"/>
+		</tab>
+	</window>
+	<window type="1" name="slits" date="2458694.5976849" x="255" y="0" w="711" h="783" label="/Users/wjh/Documents/GitHub/JuniorHonsLab/TwoSlit/slits.txt" title="2">
+		<tab rows="50" cols="2" labels="0">
+			<col name="1" type="6" num="0" prec="13" plot="1" width="100" stat="0" data="2.5;2.60204;2.70408;2.80612;2.90816;3.0102;3.11224;3.21429;3.31633;3.41837;3.52041;3.62245;3.72449;3.82653;3.92857;4.03061;4.13265;4.23469;4.33673;4.43878;4.54082;4.64286;4.7449;4.84694;4.94898;5.05102;5.15306;5.2551;5.35714;5.45918;5.56122;5.66327;5.76531;5.86735;5.96939;6.07143;6.17347;6.27551;6.37755;6.47959;6.58163;6.68367;6.78571;6.88776;6.9898;7.09184;7.19388;7.29592;7.39796;7.5;"/>
+			<col name="2" type="6" num="0" prec="13" plot="2" width="100" stat="0" data="0.000141341;0.00049833;0.000288211;0.000457984;0.0040738;0.00942845;0.0096747;0.00305112;0.00326592;0.0338988;0.104292;0.187315;0.227173;0.183347;0.0792946;0.00731573;0.068639;0.284858;0.554619;0.706578;0.624398;0.350995;0.0806155;0.0283461;0.267412;0.660912;0.94945;0.93596;0.629733;0.239587;0.0214231;0.0965415;0.375922;0.639744;0.70234;0.535086;0.263531;0.0575399;0.00922365;0.0879504;0.189892;0.226836;0.18147;0.0975798;0.0299106;0.00242976;0.0036175;0.00996811;0.00909272;0.00365095;"/>
+		</tab>
+	</window>
+	<window type="3" name="Graph1" date="2458694.5979743" x="547" y="-38" w="537" h="478" active="1" dpi="72">
+		<layout cw="533" ch="433" w="400" h="300" left="5" right="5" top="5" bottom="5" rows="1" cols="1" vSpace="5" hSpace="5" hAlign="0" vAlign="0" align="0" common="0" link="1" scale="1" currentLayer="0" sPrint="0" cmPrint="0" atUnits="1" atdIndex="0" atPolicy="4" alMode="0" luMode="2"/>
+		<tab x="5" y="5" w="522" h="422" autoscale="1" maxMajorTicks="20" gap="1" scaleFont="1" dataMargins="1">
+			<page x="0.00938086" y="0.0115473" w="0.979362" h="0.974596"/>
+			<title text="Title" color="#000000" font=".SF NS Text,15,-1,5,75,0,0,0,0,0" align="4228" fmw="32.625"/>
+			<frame bg="#ffffff,0"/>
+			<canvas x="66" y="78" w="400" h="300" fixRatio="0" bg="#ffffff,0"/>
+			<grid xAxis="2" yAxis="0">
+				<majx lc="#a0a0a4" lw="1" ls="0"/>
+				<minx lc="#a0a0a4" lw="1" ls="1"/>
+				<majy lc="#a0a0a4" lw="1" ls="0"/>
+				<miny lc="#a0a0a4" lw="1" ls="1"/>
+			</grid>
+			<curve type="0" z="21" table="slits" x="1" y="2" from="0" to="-1" line="1" lc="#000000" lw="1" ls="0" brc="#000000" brs="0"/>
+			<axis id="0" on="1" type="0" format="0" prec="6" lw="1">
+				<div from="-0.2" to="1" step="0" maj="7" min="5" type="0"/>
+				<ticks maj="1" majl="9" min="1" minl="5"/>
+				<title text="%(?Y)" color="#000000" font=".SF NS Text,13,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="38.7188"/>
+				<labels space="4" font=".SF NS Text,13,-1,5,50,0,0,0,0,0" align="0"/>
+			</axis>
+			<axis id="1" on="1" type="0" format="0" prec="6" lw="1">
+				<div from="-0.2" to="1" step="0" maj="7" min="5" type="0"/>
+				<ticks maj="1" majl="9" min="1" minl="5"/>
+				<title text="%(?Y)" color="#000000" font=".SF NS Text,13,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="38.7188"/>
+				<labels space="4" font=".SF NS Text,13,-1,5,50,0,0,0,0,0" align="0"/>
+			</axis>
+			<axis id="2" on="1" type="0" format="0" prec="6" lw="1">
+				<div from="2" to="8" step="0" maj="7" min="5" type="0"/>
+				<ticks maj="1" majl="9" min="1" minl="5"/>
+				<title text="%(?X)" color="#000000" font=".SF NS Text,13,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="39"/>
+				<labels space="4" font=".SF NS Text,13,-1,5,50,0,0,0,0,0" align="0"/>
+			</axis>
+			<axis id="3" on="1" type="0" format="0" prec="6" lw="1">
+				<div from="2" to="8" step="0" maj="7" min="5" type="0"/>
+				<ticks maj="1" majl="9" min="1" minl="5"/>
+				<title text="%(?X)" color="#000000" font=".SF NS Text,13,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="39"/>
+				<labels space="4" font=".SF NS Text,13,-1,5,50,0,0,0,0,0" align="0"/>
+			</axis>
+			<item type="2" x="2.15037593984962" y="0.959866220735786" frame="1" lc="#000000" lw="1" ls="0" bg="#ffffff,0" onTop="1" at="0" on="1" auto="1" font=".SF NS Text,13,-1,5,50,0,0,0,0,0" text="\l(1)%(1)"/>
+		</tab>
+	</window>
+</qti>

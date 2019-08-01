@@ -46,6 +46,10 @@ def main():
     xpos,intensity = csv.readCSV(file)
     peak = (xpos[0] + xpos[-1])/2
 
+
+    t.tprint("Number of data points : ",xpos.size)
+    t.tprint("X range is : ",xpos[0]," to ",xpos[-1])
+
     width = t.getFloat("Slit width",0.1)
     separ = t.getFloat("Slit seperation",0.4)
     peak = t.getFloat("Peak",peak)
