@@ -52,27 +52,31 @@ def main():
     res = t.getFloat("Static resistance",100.0)
     alpha = t.getFloat("Alpha",2.0)
     maxv = t.getFloat("Maximum voltage",50.0)
+    offset = t.getFloat("Current offset",0.0)
     sd = t.getFloat("SD of noise as percentage",0.1)
+
+
     
     resistor = Resistor(res,alpha)
 
     
     v_array = np.linspace(0,maxv,50)
-    i_array = resistor.getCurrent(v_array)
+    i_array = resistor.getCurrent(v_array) + offset
     imax = i_array[-1]
     sd *= imax
+    e_array = np.full(v_array.size,sd)
     n_array = np.random.normal(i_array,sd)
     n_array = np.maximum(n_array,0.0)     # Force to be positive
 
-    #f.writeCSV(t.getFilename("File : ","txt"),[v_array,n_array])
+    f.writeCSV(t.getFilename("File : ","txt"),[v_array,n_array,e_array])
     
     
-    #    plt.plot(v_array,i_array,"r")
+    plt.plot(v_array,i_array,"r")
     #    plt.plot(v_array,resistor.getCurrentApprox(v_array),"g")
-    plt.plot(v_array,resistor.getResistance(v_array),"r")
-    plt.plot(v_array,resistor.getResistanceApprox(v_array),"g")
+    #plt.plot(v_array,resistor.getResistance(v_array),"r")
+    #plt.plot(v_array,resistor.getResistanceApprox(v_array),"g")
     
-    #     plt.plot(v_array,n_array,"+")
+    plt.plot(v_array,n_array,"+")
     plt.show()
     
 main()

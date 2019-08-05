@@ -36,7 +36,7 @@ def readCSV(file,cols = None,separ=",",headerskip = 0):
     i = 0   # Nubmber of lines read
     for line in reader:
         # Skip if in header, starte with a hash or of length 0
-        if i >= headerskip and not line[0].startswith('#') and len(line) > 0:  # Ignore comments
+        if i >= headerskip and len(line) > 0 and not line[0].startswith('#') :  # Ignore comments
 
             vals = []
             if cols == None:           # If no cols given so read all
