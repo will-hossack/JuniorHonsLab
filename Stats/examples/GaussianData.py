@@ -1,0 +1,31 @@
+"""
+Formgaussian data with optional noise
+"""
+import numpy as np
+import csvfile as f
+
+def gauss(x,a,b,c,d):
+    """
+    Define function to fit, (linear)
+    """
+    return a*np.exp(-((x - b)/(2*c**2))**2) + d
+
+def main():
+
+    
+    w0 = float(input("w0 : "))
+    peak = 10
+    width = 2.0
+    sd = float(input("SD of noise as fraction of max : "))
+    sd *= peak
+
+
+
+               
+    x = np.linspace(0.0,100.0,50)
+    y = gauss(x,peak,w0,width,0.0)    # make gaussian
+    y = np.random.normal(y,sd)         # add noise
+    y = np.maximum(y,0.0)             # force positice (will add a DC)
+    f.writeCSV(str(input("File : ")),[x,y,np.full(x.size,sd)])
+
+main()

@@ -18,7 +18,7 @@ def main():
     
     #       Form the data
     slits = TwoSlits(separ,width,distance,peak,wave)
-    x_array = np.linspace(0.0,10.0,500)
+    x_array = np.linspace(-5.0,5.0,500)
     y_array = slits.getArrayValues(x_array)
 
     #      Plot the output

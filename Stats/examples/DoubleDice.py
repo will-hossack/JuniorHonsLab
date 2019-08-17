@@ -59,7 +59,7 @@ def line(x, a, b, c, d, e):
     return a*np.exp(-b*x) + c*np.exp(-d*x) + e
 
 long = 20     
-short = 4
+short = 6
 
 
 
@@ -107,16 +107,25 @@ def main():
     perr = np.sqrt(np.diag(pcov))        # Errors
     print("Optimal fit values " + str(popt))
     print("Error on values " + str(perr))
+    print("Long decay : " + str(popt[1]))
+    print("Short decay : " + str(popt[3]))
 
-
+    plt.subplot(2,1,1)
     #                Plot data
     plt.errorbar(x,y,xerr=0.0,yerr=sig,fmt="bx")
     #                plot the optimal line
-    plt.plot(x,line(x,*popt),"r",label="Decay: {0:8.4f} +\- {1:8.4f}".format(popt[1],perr[1]))
-    #plt.title("Decay plot for {0:d} dice with {1:d} sides".format(startsample,sides))
+    plt.plot(x,line(x,*popt),"r",label="Decay: {0:8.4f} and {1:8.4f}".format(popt[1],popt[3]))
+    plt.title("Double Decay plot for 20 and 6 sided dice") 
     plt.xlabel("Generation")
     plt.ylabel("Dice Number")
     plt.legend(loc="upper right",fontsize="small")
+
+
+    #    Add residuals
+    plt.subplot(2,1,2)
+    plt.errorbar(x,line(x,*popt) - y,xerr = 0.0, yerr = sig,fmt = "rx")
+    plt.xlabel("x value")
+    plt.ylabel("y residual")
     plt.show()
     
 

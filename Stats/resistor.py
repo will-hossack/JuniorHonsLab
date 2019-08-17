@@ -43,8 +43,8 @@ class Resistor(object):
         return v/self.getResistance(v)        
 
     def getCurrentApprox(self,v):
-        return v/self.getResistanceApprox(v)
-        #return v/self.r - self.alpha*v**3/self.r**3
+        #return v/self.getResistanceApprox(v)
+        return v/self.r - self.alpha*v**3/self.r**3
 
 def main():
 
@@ -72,9 +72,6 @@ def main():
     
     
     plt.plot(v_array,i_array,"r")
-    #    plt.plot(v_array,resistor.getCurrentApprox(v_array),"g")
-    #plt.plot(v_array,resistor.getResistance(v_array),"r")
-    #plt.plot(v_array,resistor.getResistanceApprox(v_array),"g")
     
     plt.plot(v_array,n_array,"+")
     plt.show()

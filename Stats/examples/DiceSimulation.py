@@ -1,9 +1,14 @@
+"""
+Dice simulation program written for Physics 1B lab but adapted to JH to show fitting of a neg expotential with
+weighted errors.
+"""
+
 import random
 import math
-import tio as t
 import matplotlib.pyplot as plt     # Import the plot package as plt
 import numpy as np
 from scipy.optimize import curve_fit
+import csvfile as f
 
 
 class Dice(object):
@@ -46,23 +51,25 @@ class Dice(object):
                 n += 1
         return n
 
-def dline(x, a, b, c):
+    
+def line(x, a, b, c):
+    """
+    Line to bve fitted, note use of np.exp() to allow np.ndarray() to be automatically returned.
+    """
     return a*np.exp(-b*x) + c
 
-def line(x,a,b,c):
-    y = np.empty(x.size)
-    for i in range(0,x.size):
-        y[i] = a*math.exp(-b*x[i]) + c
-    return y
-
 def main():
-    sides = t.getInt("Number of sides on each dice",6)
-    startsample = t.getInt("Starting Sample",1000)
+    """
+    Main program start
+    """
+    
+    sides = int(input("Number of sides on each dice : "))
+    startsample = int(input("Starting Sample : "))
 
-    dice = Dice(sides)
+                
+    dice = Dice(sides)        # Make dice of right number of sides
 
-
-    xData = []
+    xData = []                # List to hold results of simulation
     yData = []
     run = 0
     sample = startsample
@@ -80,23 +87,32 @@ def main():
     #            Do data fitting
     x = np.array(xData)     # convert x/y data to np arrays.
     y = np.array(yData)
-    sig = np.sqrt(y)/y
-    #                Define a 3 parameter line
-    #line = lambda x,a,b,c : a*np.exp(-b*x) + c
-    #                Do a fit
-    popt,pcov = curve_fit(line,x,y,p0=[startsample,1.0/sides,0.0],sigma=sig)
-    t.tprint(popt)
+    sig = np.sqrt(y)        # sd of error on y-data
+    
+    f.writeCSV(str(input("File : ")),[x,y,sig])     # Write data to CSV file
+    
+    #                Do the fitefit
+    popt,pcov = curve_fit(line,x,y,sigma=sig)
+    perr = np.sqrt(np.diag(pcov))        # Errors
+    print("Optimal fit values " + str(popt))
+    print("Error on values " + str(perr))
 
 
     #                Plot data
-    plt.plot(x,y,"x")
+    plt.subplot(2,1,1)
+    plt.errorbar(x,y,xerr=0.0,yerr=sig,fmt="bx")
+    #                plot the optimal line
+    plt.plot(x,line(x,*popt),"r",label="Decay: {0:8.4f} +\- {1:8.4f}".format(popt[1],perr[1]))
     plt.title("Decay plot for {0:d} dice with {1:d} sides".format(startsample,sides))
-    #                Plot the fitted line with 200 points
-    xfine = np.linspace(0.0,float(run),200)
-    plt.plot(xfine,dline(xfine,popt[0],popt[1],popt[2]),"r",label="Decay parameter {0:8.4f}".format(popt[1]))
     plt.xlabel("Generation")
     plt.ylabel("Dice Number")
     plt.legend(loc="upper right",fontsize="small")
+
+    plt.subplot(2,1,2)
+    plt.errorbar(x,line(x,*popt) - y,xerr = 0.0, yerr = sig,fmt = "rx")
+    plt.xlabel("Generation")
+    plt.ylabel("Residual")
+    
     plt.show()
     
 

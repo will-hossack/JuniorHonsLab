@@ -1,19 +1,21 @@
-""" Progam with method to read CVS files """
+""" Functions to read and write CSV file to / from numpy arrays.
+Author: Will Hossack, to support Junior Hons Lab.
+"""
 
-import math
 import csv
 import numpy as np
+
+comment = "#"         # Comment delimeter
 
 
 def readCSV(file,cols = None,separ=",",headerskip = 0):
     """
-    Read a comma delimited cvs files of floats with secified columns 
-    if supplied.
+    Read a comma delimited cvs files of floats with secified columns if supplied.
    
     :param file: the csv file to be read
     :type file: str or file
     :param cols: truple of locicals specifiying which columns to be read Default = None (all)
-    :type cols: list[bool]
+    :type cols: list[bool] or None
     :param separ: field seperator, (Default = comma)
     :param headerskip: number of lines in headed to skip (Default = 0)
     :return:   two dimensional np.array of values.
@@ -22,11 +24,7 @@ def readCSV(file,cols = None,separ=",",headerskip = 0):
 
     #     Open the file if a name was given as a str.
     if isinstance(file,str):
-        try:
-            file = open(file,"r",newline='')
-        except IOError:
-            print("Failed to open file %s".format(name))
-            return null
+        file = open(file,"r",newline='')
         
     #      open the reader with specified field separator
     reader = csv.reader(file,delimiter=separ)
@@ -35,9 +33,8 @@ def readCSV(file,cols = None,separ=",",headerskip = 0):
     data = []
     i = 0   # Nubmber of lines read
     for line in reader:
-        # Skip if in header, starte with a hash or of length 0
-        if i >= headerskip and len(line) > 0 and not line[0].startswith('#') :  # Ignore comments
-
+        # Skip if in of lenth 0, in header or starts with comment
+        if len(line) > 0 and i >= headerskip and not line[0].startswith(comment) :  
             vals = []
             if cols == None:           # If no cols given so read all
                 for t in line:
@@ -58,17 +55,17 @@ def readCSV(file,cols = None,separ=",",headerskip = 0):
 def writeCSV(file,data,cols = None):
     """
     Write CSV file with data typically supplied as a list or np.arrays.
-    Param file, either opened file or name of file, if name give as str, then the file will be open with "w" flag
-    Param data as a list of np.arrays.
-    Param cols boolean list specifying which colums of data are to be written, defaults to None, which means all cols.
+
+    :param file: file or name of file, 
+    :type file: file or str
+    :param data: list of np.arrays.
+    :type data: list of np.ndarrays
+    :param cols: boolean list specifying which colums of data are to be written, defaults to None, which means all cols.
+    :type cole: truple of booleans or None
     """
     #     Open the file if a name was given as a str.
     if isinstance(file,str):
-        try:
-            file = open(file,"w",newline='')
-        except IOError:
-            print("Failed to open file %s".format(name))
-            return null
+        file = open(file,"w",newline='')
         
     writer = csv.writer(file)           # Make writer
     #      Read through data writing out what is required.
