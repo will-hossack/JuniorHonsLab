@@ -13,14 +13,16 @@ def gauss(x,a,b,c,d):
 def main():
 
     
-    w0 = float(input("w0 : "))
-    peak = 10
+    w0One = float(input("w0 One : "))
+    w0Two = float(input("w0 Two : "))
+    peakOne = 10
+    peakTwo = 6
     width = float(input("width :"))
     sd = float(input("SD of noise as fraction of max : "))
-    sd *= peak
+    sd *= (peakOne + peakTwo)/2
                
-    x = np.linspace(0.0,2*w0,50)
-    y = gauss(x,peak,w0,width,0.0)    # make gaussian
+    x = np.linspace(0.0,w0One + w0Two,100)
+    y = gauss(x,peakOne,w0One,width,0.0) + gauss(x,peakTwo,w0Two,width,0.0) 
     y = np.random.normal(y,sd)         # add noise
     y = np.maximum(y,0.0)             # force positice (will add a DC)
     f.writeCSV(str(input("File : ")),[x,y,np.full(x.size,sd)])

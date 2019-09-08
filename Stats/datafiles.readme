@@ -1,0 +1,5 @@
+d1.txt		% x,y linear, no noise a = 0.5, b=1.5 100 points
+d2.txt		% x,y linear, a=1.4, b=2.0, sd = 0.5 50 points
+d3.txt		% x,y linear, a=2.1, b=5, sd = 3.0 80 points
+d4.txt		% x,y linear, a=3.1, b=10.5,sd = 15, 90points
+d5.txt		% x,y linear, a=2.2, b=20,sd=25, 30points
