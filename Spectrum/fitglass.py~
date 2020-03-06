@@ -1,0 +1,45 @@
+import numpy as np
+import csvfile as csv
+import optics.wavelength as w
+import tio
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+
+
+
+def main():
+
+    file = tio.getFilename("File","txt")
+    wave,ref = csv.readCSV(file)
+
+    print(wave)
+    print(ref)
+    
+    fit = lambda wave,a,b: w.Sellmeier(a,b).getArrayValues(wave)
+    #fit = lambda wave,a,b,c: w.CauchyIndex(a,b,c).getArrayValues(wave)
+
+    popt,pcov = curve_fit(fit,wave,ref,p0=[1.0,0.2,1.0])
+    print(popt)
+
+    index = w.Sellmeier(*popt)
+    #index = w.CauchyIndex(*popt)
+
+    print("Nd : " + str(index.getNd()) + " Vd : " + str(index.getVd()))
+    dn = index.getDerivative(w.Sodium_D)
+    print("Derivative is : " + str(dn))
+    
+    plt.plot(wave,ref,"x")
+    
+    index.draw()
+    plt.show()
+
+    
+
+    
+
+    
+
+    
+main()
+

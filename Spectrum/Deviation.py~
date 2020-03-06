@@ -1,0 +1,17 @@
+"""
+Program to plot out angle of min deviation aganst lambda for a prism
+"""
+
+
+
+import optics.wavelength as w
+import matplotlib.pyplot as plt
+import math
+import tio
+
+def main():
+
+    prismAngle = tio.getFloat("Prism angle in degrees",60,10,90)
+    index = w.MaterialIndex()
+
+main()
