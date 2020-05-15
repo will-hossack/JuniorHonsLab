@@ -5,35 +5,21 @@ fit first order Sellmier function
 
 import numpy as np
 import csvfile as csv
-import optics.wavelength as w
+from optics.wavelength import Sellmeier,Sodium_D
 import tio
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
-
-
-
 
 def main():
 
     file = tio.getFilename("File","txt")   # Open File
     wave,ref = csv.readCSV(file)           # Read to np arrays
 
-    #        Define the fite function with two parameters
-    fit = lambda wave,a,b: w.Sellmeier(a,b).getArrayValues(wave)
-    
-
-    #        Do the fit
-    popt,pcov = curve_fit(fit,wave,ref,p0=[1.25,0.1])
-    tio.tprint(popt)
-    tio.tprint("Alpha is : ",popt[0]," and lambda_0 is : ",popt[1])
+    index = Sellmeier(1.25,0.1).fitIndex(wave,ref)
                           
-    
-                          
-    index = w.Sellmeier(*popt)
-    
+    print("Index : " + repr(index))
 
     print("Nd : " + str(index.getNd()) + " Vd : " + str(index.getVd()))
-    dn = index.getDerivative(w.Sodium_D)
+    dn = index.getDerivative(Sodium_D)
     print("Derivative is : " + str(dn))
     
     plt.plot(wave,ref,"x")
